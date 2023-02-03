@@ -18,7 +18,7 @@ jobs:
       - ls dist/progam
     artifacts:
       - name: dist
-        path: progam/dist/
+        path: ./progam/dist/
     
   - name: Test Solana
     commands:
