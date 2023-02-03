@@ -21,8 +21,6 @@ jobs:
     commands:
       - npm run lint
     resources:
-      - name: program
-        path: ./
       - name: npm
         path: ./
     
@@ -31,8 +29,6 @@ jobs:
       - ls
       - npm run test:program-rust
     resources:
-      - name: program
-        path: ./
       - name: npm
         path: ./
         
