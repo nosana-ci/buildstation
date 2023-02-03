@@ -17,18 +17,6 @@ jobs:
       - npm run lint
       - npm run build:program-rust
       - npm run test:program-rust
-      - ls dist/program
-    artifacts:
-      - name: dist
-        path: ./program/dist/
-    
-  - name: Test Solana
-    commands:
-      - ls
-      - npm run test:program-rust
-    resources:
-      - name: dist
-        path: ./
-    
+      - ls 
     
       
