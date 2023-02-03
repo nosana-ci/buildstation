@@ -44,7 +44,7 @@ jobs:
         
   - name: Deploy to Solana Devnet
     commands:
-      - solana-keygen new -o /root/.config/solana/id.json
+      - sudo solana-keygen new -o /root/.config/solana/id.json
       - solana airdrop 1 --url devnet
       - solana program write-buffer ./dist/program/helloworld.so  --url devnet
     
