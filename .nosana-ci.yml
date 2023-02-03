@@ -2,8 +2,8 @@ nosana:
   description: Nosana-Node Pipeline
 
 global:
- # docker pull 
-  image: registry.hub.docker.com/solanalabs/rust:latest
+ # projectserum/build:v0.26.0
+  image: registry.hub.docker.com/projectserum/build:v0.26.0
 
   trigger:
     branch:
@@ -13,8 +13,6 @@ jobs:
   - name: Hello World Solana
     commands:
       - ls
-      - sh -c "$(curl -sSfL https://release.solana.com/v1.15.0/install)"
-      - export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
       - npm install
       - npm run build:program-rust
       
