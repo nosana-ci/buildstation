@@ -2,7 +2,8 @@ nosana:
   description: Nosana-Node Pipeline
 
 global:
-  image: registry.hub.docker.com/library/solana:stable
+ # docker pull 
+  image: registry.hub.docker.com/library/solanalabs/solana:stable
 
   trigger:
     branch:
