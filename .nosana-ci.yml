@@ -14,9 +14,6 @@ jobs:
     commands:
       - ls
       - npm install
-    artifacts:
-      - name: program
-        path: dist/
       - name: npm
         path: node_modules
         
