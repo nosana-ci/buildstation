@@ -1,0 +1,15 @@
+nosana:
+  description: Nosana-Node Pipeline
+
+global:
+  image: registry.hub.docker.com/library/alpine:latest
+
+  trigger:
+    branch:
+      - master
+
+jobs:
+  - name: Hello World Solana
+    commands:
+      - ls
+      
