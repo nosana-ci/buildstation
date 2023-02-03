@@ -14,6 +14,7 @@ jobs:
     commands:
       - ls
       - npm install
+    artifacts:
       - name: npm
         path: node_modules
         
@@ -31,12 +32,4 @@ jobs:
     resources:
       - name: npm
         path: ./
-        
-#  - name: Deploy to Solana Devnet
-#    commands:
-#      - sudo solana-keygen new -o /root/.config/solana/id.json
-#      - solana airdrop 1 --url devnet
-#      - solana program write-buffer ./dist/program/helloworld.so  --url devnet
-    
-    
       
