@@ -14,11 +14,22 @@ jobs:
     commands:
       - ls
       - npm install
-      - npm run lint
       - npm run build:program-rust
+      - ls
     artifacts:
       - name: program
-        path: ./dist/progam
+        path: dist/
+      - name: npm
+        path: node_modules
+        
+  - name: Lint
+    commands:
+      - npm lint
+    resources:
+      - name: program
+        path: ./
+      - name: npm
+        path: ./
     
   - name: Test Solana
     commands:
@@ -27,6 +38,14 @@ jobs:
     resources:
       - name: program
         path: ./
+      - name: npm
+        path: ./
+        
+  - name: Deploy to Solana Devnet
+    commands:
+      - solana-keygen new -o /root/.config/solana/id.json
+      - solana airdrop 1 --url devnet
+      - solana program write-buffer ./dist/program/helloworld.so  --url devnet
     
     
       
