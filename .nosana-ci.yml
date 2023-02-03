@@ -24,7 +24,7 @@ jobs:
         
   - name: Lint
     commands:
-      - npm lint
+      - npm run lint
     resources:
       - name: program
         path: ./
