@@ -20,7 +20,7 @@ jobs:
       - ls dist/program
     artifacts:
       - name: dist
-        path: program/dist/
+        path: ./program/dist/
     
   - name: Test Solana
     commands:
