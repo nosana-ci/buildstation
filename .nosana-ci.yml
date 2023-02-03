@@ -16,7 +16,17 @@ jobs:
       - npm install
       - npm run lint
       - npm run build:program-rust
+    artifacts:
+      - name: program
+        path: ./dist/progam
+    
+  - name: Test Solana
+    commands:
+      - ls
       - npm run test:program-rust
-      - ls 
+    resources:
+      - name: program
+        path: ./
+    
     
       
