@@ -15,7 +15,8 @@ jobs:
       - ls
       - npm install
       - npm run build:program-rust
-      - ls
+      - ls 
+      - env
     artifacts:
       - name: program
         path: dist/
