@@ -3,7 +3,7 @@ nosana:
 
 global:
  # docker pull 
-  image: registry.hub.docker.com/library/solanalabs/solana:stable
+  image: registry.hub.docker.com/library/solanalabs/rust:latest
 
   trigger:
     branch:
