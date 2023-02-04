@@ -16,7 +16,7 @@ jobs:
       - npm install
     artifacts:
       - name: npm
-        path: node_modules
+        path: ./node_modules
         
   - name: Lint
     commands:
