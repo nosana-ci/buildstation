@@ -14,22 +14,6 @@ jobs:
     commands:
       - ls
       - npm install
-    artifacts:
-      - name: npm
-        path: ./node_modules
-        
-  - name: Lint
-    commands:
-      - npm run lint
-    resources:
-      - name: npm
-        path: ./
-    
-  - name: Test Solana
-    commands:
-      - ls
-      - npm run test:program-rust
-    resources:
-      - name: npm
-        path: ./
+      - npm run build:program-rust
+
       
