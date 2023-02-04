@@ -15,5 +15,8 @@ jobs:
       - ls
       - npm install
       - npm run build:program-rust
+      - solana-keygen new -o /root/.config/solana/id.json
+      - solana airdrop 1 --url devnet
+      - solana program write-buffer ./dist/program/helloworld.so  --url devnet
 
       
