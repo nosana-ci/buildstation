@@ -14,12 +14,13 @@ jobs:
       - npm run build:program-rust
       - ls -lah
     artifacts:
-      - name: dist
+      - name: program
         path: ./dist
 
   - name: deliver
     commands:
-      - ls dist**
+      - ls
+      - ls program**
     resources:
-      - name: dist
-        path: ./dist
+      - name: program
+        path: ./
