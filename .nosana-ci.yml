@@ -3,7 +3,7 @@ nosana:
   description: Solana hello world
 
 global:
-  image: solanalabs/solana:v1.14.16
+  image: solanalabs/rust
 
   trigger:
     branch:
@@ -12,6 +12,7 @@ global:
 jobs:
   - name: build
     commands:
+      - sh -c "$(curl -sSfL https://release.solana.com/v1.15.2/install)"
       - npm run build:program-rust
     artifacts:
       - name: program
