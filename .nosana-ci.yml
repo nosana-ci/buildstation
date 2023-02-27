@@ -23,4 +23,4 @@ jobs:
       - ls program**
     resources:
       - name: dist
-        path: ./
+        path: ./dist/
