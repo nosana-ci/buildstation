@@ -1,3 +1,4 @@
+
 nosana:
   description: Solana hello world
 
@@ -12,16 +13,14 @@ jobs:
   - name: build
     commands:
       - npm run build:program-rust
-      - ls -lah
     artifacts:
-      - name: dist
-        path: ./dist/
+      - name: program
+        path: dist/program/helloworld.so
 
   - name: deliver
     commands:
-      - ls -lah /dist/dist/
-      - ls -lah
-      - ls program**
+      - ls /dist
+      - ls /dist/dist/program/
     resources:
-      - name: dist
-        path: ./dist/
+      - name: program
+        path: dist
