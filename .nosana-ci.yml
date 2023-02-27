@@ -30,6 +30,3 @@ jobs:
     resources:
       - name: program
         path: dist/program
-    artifacts:
-      - name: address
-        path: address.txt
