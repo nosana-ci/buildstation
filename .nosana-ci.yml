@@ -38,6 +38,10 @@ jobs:
   - name: squads deploy
     image: node:16
     commands:
+      - cat /solana/spill.txt
+      - cat /solana/buffer.txt
+      - echo $(< /solana/spill.txt)
+      - echo $(cut -d ' ' -f2 < /solana/buffer.txt)
       - npm ci
       - |
         node scripts/createProgramUpdate.js                          \
