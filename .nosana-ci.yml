@@ -9,45 +9,46 @@ global:
       - master
 
 jobs:
-  - name: build
+  - name: build program
     commands:
       - npm run build:program-rust
     artifacts:
       - name: program
         path: dist/program/helloworld.so
 
-  - name: deliver
+  - name: write buffer
     environment:
       SOLANA_WALLET:
         type: nosana/secret
         endpoint: https://secrets.k8s.dev.nos.ci/
         value: SOLANA_WALLET
     commands:
-      - echo $SOLANA_WALLET > key.json
-      - solana config set --url devnet --keypair $(pwd)/key.json
-      - solana address > address.txt
-      - solana program write-buffer /dist/helloworld.so | tee buffer.txt
+      - mkdir /solana
+      - echo $SOLANA_WALLET > solana/private-key.json
+      - solana config set --url devnet --keypair solana/private-key.json
+      - solana address > solana/spill.txt
+      - solana program write-buffer /dist/helloworld.so | tee solana/buffer.txt
     resources:
       - name: program
         path: /dist
     artifacts:
-      - name: buffer
-        path: buffer.txt
-      - name: key
-        path: key.json
-      - name: address
-        path: address.txt
+      - name: solana
+        path: solana
 
-  - name: deploy
-    image: gcr.io/distroless/nodejs:16
+  - name: squads deploy
+    image: node:16
     commands:
-      - echo $(< /buffer.txt)
-      - ls /buffer.txt
-      - node scripts/createProgramUpdate.js --name upgradeTest --private-key /key.json --buffer $(< /buffer.txt) --spill $(< /address.txt) --multisig 3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj --program GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs --authority 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
+      - echo $(< solana/buffer.txt)
+      - echo $(< solana/spill.txt)
+      - |
+        node scripts/createProgramUpdate.js  \
+          --name upgradeTest \
+          --private-key solana/private-key.json \
+          --buffer $(< solana/buffer.txt) \
+          --spill $(< solana/spill.txt) \
+          --multisig 3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj \
+          --program GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs \
+          --authority 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
     resources:
-      - name: buffer
-        path: /buffer.txt
-      - name: key
-        path: /key.json
-      - name: address
-        path: /address.txt
+      - name: solana
+        path: /solana
