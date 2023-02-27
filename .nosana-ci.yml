@@ -15,4 +15,4 @@ jobs:
       - npm run build:program-rust
     artifacts:
       - name: program
-        path: ./dist/program
+        path: dist/program
