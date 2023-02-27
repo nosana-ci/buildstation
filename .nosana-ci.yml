@@ -19,7 +19,7 @@ jobs:
 
   - name: deliver
     commands:
-      - ls -lah /dist/
+      - ls -lah /dist/dist/
       - ls -lah
       - ls program**
     resources:
