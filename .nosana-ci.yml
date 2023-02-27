@@ -1,0 +1,18 @@
+# .nosana-ci.yml
+nosana:
+  description: Solana hello world
+
+global:
+  image: solanalabs/rust
+
+  trigger:
+    branch:
+      - master
+
+jobs:
+  - name: build
+    commands:
+      - npm run build:program-rust
+    artifacts:
+      - name: program
+        path: dist/program
