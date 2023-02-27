@@ -23,7 +23,7 @@ jobs:
         endpoint: https://secrets.k8s.dev.nos.ci/
         value: SOLANA_WALLET
     commands:
-      - mkdir /solana
+      - mkdir solana
       - echo $SOLANA_WALLET > solana/private-key.json
       - solana config set --url devnet --keypair solana/private-key.json
       - solana address > solana/spill.txt
