@@ -25,7 +25,7 @@ jobs:
     commands:
       - echo $SOLANA_WALLET > key.json
       - solana config set --url devnet --keypair $(pwd)/key.json
-      - solana program write-buffer /dist/program/helloworld.so
+      - solana program write-buffer /dist/helloworld.so
     resources:
       - name: program
         path: /dist
