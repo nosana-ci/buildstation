@@ -24,6 +24,10 @@ jobs:
         value: SOLANA_WALLET
     commands:
       - echo $SOLANA_WALLET > key.json
+      - solana config set -u d
+      - solana config set -k $(pwd)/key.json
+      - solana config get
       - solana program write-buffer -k key.json -u d dist/program/helloworld.so
     resources:
       - name: program
+        path: ./
