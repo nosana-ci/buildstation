@@ -14,7 +14,7 @@ jobs:
       - npm run build:program-rust
     artifacts:
       - name: program
-        path: dist/program/helloworld.so
+        path: dist
 
   - name: deliver
     environment:
@@ -28,4 +28,4 @@ jobs:
       - solana program write-buffer /dist/program/helloworld.so
     resources:
       - name: program
-        path: dist
+        path: /dist
