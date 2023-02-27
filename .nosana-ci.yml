@@ -36,7 +36,6 @@ jobs:
         path: solana
 
   - name: squads deploy
-    image: node:16
     commands:
       - npm ci
       - |
