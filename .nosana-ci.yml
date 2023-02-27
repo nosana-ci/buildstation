@@ -23,11 +23,10 @@ jobs:
         endpoint: https://secrets.k8s.dev.nos.ci/
         value: SOLANA_WALLET
     commands:
+      - ls dist**
       - echo $SOLANA_WALLET > key.json
-      - solana config set -u d
-      - solana config set -k $(pwd)/key.json
-      - solana config get
-      - solana program write-buffer -k key.json -u d dist/program/helloworld.so | tee address.txt
+      - solana config set --url devnet --keypair $(pwd)/key.json
+      - solana program write-buffer dist/program/helloworld.so
     resources:
       - name: program
         path: dist/program
