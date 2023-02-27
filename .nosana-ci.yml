@@ -40,10 +40,10 @@ jobs:
       - npm ci
       - |
         node scripts/createProgramUpdate.js                          \
-          --name upgradeTest                                         \
+          --name        upgradeTest                                  \
           --private-key /solana/private-key.json                     \
-          --buffer      $(cut -d ' ' -f2 < /solana/buffer.txt)       \
-          --spill       $(cat /solana/spill.txt)                     \
+          --buffer      "$(cut -d ' ' -f2 < /solana/buffer.txt)"     \
+          --spill       "$(cat /solana/spill.txt)"                   \
           --multisig    3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj \
           --program     GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs \
           --authority   9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
