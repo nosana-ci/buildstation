@@ -2,7 +2,7 @@ nosana:
   description: Solana hello world
 
 global:
-  image: nosana/solana:v1.0.2
+  image: nosana/solana:v1.0.3
 
   trigger:
     branch:
