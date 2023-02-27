@@ -35,7 +35,8 @@ jobs:
 
   - name: deploy
     commands:
-      - BUFFER=$(< /buffer.txt)
+      - export BUFFER=$(< /buffer.txt)
+      - echo $BUFFER
       - |
         echo Deploying buffer ${BUFFER#*: }
     resources:
