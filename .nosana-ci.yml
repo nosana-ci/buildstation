@@ -19,6 +19,7 @@ jobs:
 
   - name: deliver
     commands:
+      - ls -lah /
       - ls -lah
       - ls program**
     resources:
