@@ -27,7 +27,10 @@ jobs:
       - solana config set -u d
       - solana config set -k $(pwd)/key.json
       - solana config get
-      - solana program write-buffer -k key.json -u d dist/program/helloworld.so
+      - solana program write-buffer -k key.json -u d dist/program/helloworld.so | tee address.txt
     resources:
       - name: program
-        path: ./
+        path: dist/program
+    artifacts:
+      - name: address
+        path: address.txt
