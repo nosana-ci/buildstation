@@ -53,4 +53,4 @@ jobs:
           --authority 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
     resources:
       - name: solana
-        path: /solana
+        path: /
