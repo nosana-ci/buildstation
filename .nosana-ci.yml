@@ -25,6 +25,7 @@ jobs:
     commands:
       - echo $SOLANA_WALLET > key.json
       - solana config set --url devnet --keypair $(pwd)/key.json
+      - solana address > address.txt
       - solana program write-buffer /dist/helloworld.so | tee buffer.txt
     resources:
       - name: program
@@ -32,12 +33,22 @@ jobs:
     artifacts:
       - name: buffer
         path: buffer.txt
+      - name: key
+        path: key.json
+      - name: address
+        path: address.txt
 
   - name: deploy
+    image: node:16
     commands:
       - BUFFER=$(< /buffer.txt)
       - |
         echo Deploying buffer ${BUFFER#*: }
+      - node scripts/createProgramUpdate.js --name upgradeTest --private-key /key.json --buffer ${cat /buffer.txt} --spill $(cat /address.txt) --multisig 3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj --program GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs --authority 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
     resources:
       - name: buffer
         path: /buffer.txt
+      - name: key
+        path: /key.json
+      - name: address
+        path: /address.txt
