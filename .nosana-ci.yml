@@ -35,10 +35,8 @@ jobs:
 
   - name: deploy
     commands:
-      - export BUFFER=$(< /buffer.txt)
-      - echo $BUFFER
-      - |
-        echo Deploying buffer ${BUFFER#*: }
+      - echo $(< /buffer.txt)
+      - ls /buffer.txt
     resources:
       - name: buffer
         path: /buffer.txt
