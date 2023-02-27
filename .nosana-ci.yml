@@ -41,9 +41,8 @@ jobs:
   - name: deploy
     image: node:16
     commands:
-      - BUFFER=$(< /buffer.txt)
-      - |
-        echo Deploying buffer ${BUFFER#*: }
+      - echo $(< /buffer.txt)
+      - ls /buffer.txt
       - node scripts/createProgramUpdate.js --name upgradeTest --private-key /key.json --buffer ${cat /buffer.txt} --spill $(cat /address.txt) --multisig 3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj --program GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs --authority 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
     resources:
       - name: buffer
