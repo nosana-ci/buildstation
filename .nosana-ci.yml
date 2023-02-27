@@ -15,3 +15,15 @@ jobs:
     artifacts:
       - name: program
         path: dist/program
+
+  - name: deliver
+    environment:
+      SOLANA_WALLET:
+        type: nosana/secret
+        endpoint: https://secrets.k8s.dev.nos.ci/
+        value: SOLANA_WALLET
+    commands:
+      - echo $SOLANA_WALLET > key.json
+      - solana program write-buffer -k key.json -u d dist/program/helloworld.so
+    resources:
+      - name: program
