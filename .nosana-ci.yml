@@ -27,10 +27,10 @@ jobs:
       - echo $SOLANA_WALLET > solana/private-key.json
       - solana config set --url devnet --keypair solana/private-key.json
       - solana address > solana/spill.txt
-      - solana program write-buffer /dist/helloworld.so | tee solana/buffer.txt
+      - solana program write-buffer /helloworld.so | tee solana/buffer.txt
     resources:
       - name: program
-        path: /dist
+        path: /
     artifacts:
       - name: solana
         path: solana
@@ -38,19 +38,16 @@ jobs:
   - name: squads deploy
     image: node:16
     commands:
-      - echo $(< /solana/buffer.txt)
-      - echo $(< /solana/spill.txt)
-      - ls /solana
       - npm ci
       - |
-        node scripts/createProgramUpdate.js  \
-          --name upgradeTest \
-          --private-key /solana/private-key.json \
-          --buffer $(< /solana/buffer.txt) \
-          --spill $(< /solana/spill.txt) \
-          --multisig 3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj \
-          --program GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs \
-          --authority 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
+        node scripts/createProgramUpdate.js                          \
+          --name upgradeTest                                         \
+          --private-key /solana/private-key.json                     \
+          --buffer      $(cut -d ' ' -f2 < /solana/buffer.txt)       \
+          --spill       $(< /solana/spill.txt)                       \
+          --multisig    3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj \
+          --program     GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs \
+          --authority   9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
     resources:
       - name: solana
         path: /
