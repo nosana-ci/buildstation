@@ -1,37 +1,33 @@
-
-
+es (28 sloc) 671 Bytes
 nosana:
-  description: Nosana-Node Pipeline
+  description: Solana hello world
 
 global:
- # projectserum/build:v0.26.0
-  image: projectserum/build:v0.26.0
+  image: nosana/solana:v1.0.3
 
   trigger:
     branch:
       - master
 
 jobs:
-  - name: Hello World Solana
+  - name: build
     commands:
-      - ls
-      - npm install
-      - ls -lah
+      - npm run build:program-rust
     artifacts:
-      - name: npm
-        path: node_modules
-        
-  - name: Lint
+      - name: program
+        path: ./dist
+
+  - name: deliver
+    environment:
+      SOLANA_WALLET:
+        type: nosana/secret
+        endpoint: https://secrets.k8s.dev.nos.ci/
+        value: SOLANA_WALLET
     commands:
-      - npm run lint
+      - echo $SOLANA_WALLET > key.json
+      - solana config set --url devnet --keypair $(pwd)/key.json
+      - ls dist**
+      - solana program write-buffer dist/program/helloworld.so
     resources:
-      - name: npm
-        path: ./
-    
-  - name: Test Solana
-    commands:
-      - ls
-      - npm run test:program-rust
-    resources:
-      - name: npm
-        path: ./
+      - name: program
+        path: ./dist
