@@ -1,5 +1,5 @@
 nosana:
-  description: Solana hello world program
+  description: Solana hello world
 
 global:
   image: nosana/solana:v1.0.3
