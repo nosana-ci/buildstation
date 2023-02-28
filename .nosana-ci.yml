@@ -4,6 +4,11 @@ nosana:
 global:
   image: nosana/solana:v1.0.3
 
+  environment:
+    AUTHORITY_PUBKEY: 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
+    MULTISIG_PUBKEY: 3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj
+    SQUADS_PUBKEY: GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs
+
   trigger:
     branch:
       - master
@@ -27,7 +32,7 @@ jobs:
       - echo $SOLANA_WALLET > solana/private-key.json
       - solana config set --url devnet --keypair solana/private-key.json
       - solana address > solana/spill.txt
-      - solana program write-buffer /helloworld.so | tee solana/buffer.txt
+      - solana program write-buffer --buffer-authority $AUTHORITY_PUBKEY /helloworld.so | tee solana/buffer.txt
     resources:
       - name: program
         path: /
@@ -39,14 +44,14 @@ jobs:
     commands:
       - npm ci
       - |
-        node scripts/createProgramUpdate.js                          \
-          --name        upgradeTest                                  \
-          --private-key /solana/private-key.json                     \
-          --buffer      "$(cut -d ' ' -f2 < /solana/buffer.txt)"     \
-          --spill       "$(cat /solana/spill.txt)"                   \
-          --multisig    3TsTokHbDvRqsymuC5LZrK2NkUQG2LHxAShydPY2A1Cj \
-          --program     GmpDbY3M5KXM9TPooZziM7SC5rT9YZZ1sf3AfTcyZwAs \
-          --authority   9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
+        node scripts/createProgramUpdate.js                      \
+          --name        upgradeTest                              \
+          --private-key /solana/private-key.json                 \
+          --buffer      "$(cut -d ' ' -f2 < /solana/buffer.txt)" \
+          --spill       "$(cat /solana/spill.txt)"               \
+          --multisig    $MULTISIG_PUBKEY                         \
+          --program     $SQUADS_PUBKEY                           \
+          --authority   $AUTHORITY_PUBKEY
     resources:
       - name: solana
         path: /
