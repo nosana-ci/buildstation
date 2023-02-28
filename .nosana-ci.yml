@@ -32,7 +32,8 @@ jobs:
       - echo $SOLANA_WALLET > solana/private-key.json
       - solana config set --url devnet --keypair solana/private-key.json
       - solana address > solana/spill.txt
-      - solana program write-buffer --buffer-authority $AUTHORITY_PUBKEY /helloworld.so | tee solana/buffer.txt
+      - solana program write-buffer /helloworld.so | tee solana/buffer.txt
+      - solana program set-buffer-authority "$(cut -d ' ' -f2 < solana/buffer.txt)" --new-buffer-authority $AUTHORITY_PUBKEY
     resources:
       - name: program
         path: /
