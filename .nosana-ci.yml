@@ -43,9 +43,8 @@ jobs:
 
   - name: squads deploy
     commands:
-      - npm ci
       - |
-        node scripts/createProgramUpdate.js                      \
+        nosana-cli create-program-upgrade                        \
           --name        upgradeTest                              \
           --private-key /solana/private-key.json                 \
           --buffer      "$(cut -d ' ' -f2 < /solana/buffer.txt)" \
