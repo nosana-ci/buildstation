@@ -2,7 +2,7 @@ nosana:
   description: Solana hello world
 
 global:
-  image: nosana/solana:v1.0.5
+  image: nosana/solana:v1.0.6
 
   environment:
     AUTHORITY_PUBKEY: 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
@@ -51,7 +51,21 @@ jobs:
           --spill       "$(cat /solana/spill.txt)"               \
           --multisig    $MULTISIG_PUBKEY                         \
           --program     $SQUADS_PUBKEY                           \
-          --authority   $AUTHORITY_PUBKEY
+          --authority   $AUTHORITY_PUBKEY | tee /solana/squads-deploy.json
     resources:
       - name: solana
         path: /
+    artifacts:
+      - name: solana
+        path: /solana
+
+  - name: wait for deploy
+    commands:
+      - |
+        nosana-cli await-upgrade                                 \
+          --private-key solana/private-key.json                  \
+          --program     $SQUADS_PUBKEY                           \
+          --index       "$(cat solana/squads-deploy.json | tail -n 1 | jq '.upgradeIndex')"
+    resources:
+      - name: solana
+        path: ./
