@@ -2,7 +2,7 @@ nosana:
   description: Solana hello world
 
 global:
-  image: nosana/solana:v1.0.3
+  image: nosana/solana:v1.0.5
 
   environment:
     AUTHORITY_PUBKEY: 9HgALjiPNoh7TbCP7h5FRUFggD1q3UjLfiU9AbTGmSGc
