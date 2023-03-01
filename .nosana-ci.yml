@@ -19,8 +19,8 @@ jobs:
 
   - name: deliver
     commands:
-      - ls /dist
-      - ls /dist/dist/program/
+      - ls -lah
+      - ls /
     resources:
       - name: program
         path: dist
