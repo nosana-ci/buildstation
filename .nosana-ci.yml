@@ -1,17 +1,20 @@
 nosana:
-  description: Nosana Blank Template
+  description: Solana Build Template
 
 global:
-  image: alpine:latest
+  image: nosana/solana:v1.0.6
 
   trigger:
     branch:
       - master
 
 jobs:
-  - name: Create README
+  - name: build program
     commands:
-    - echo "Hello Build Station"
-    - pwd
-    - ls
-    - env
+      - ls 
+      - lah
+      - npm ci
+      - npm run build:program-rust
+      - ls -lah
+      - npm run test:program-test
+      - Echo Done
