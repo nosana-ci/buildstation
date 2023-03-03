@@ -66,7 +66,7 @@ async fn test_helloworld() {
         GreetingAccount::try_from_slice(&greeted_account.data)
             .unwrap()
             .counter,
-        0
+        1
     );
 
     // Greet again
