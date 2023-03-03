@@ -15,5 +15,5 @@ jobs:
       - npm ci
       - npm run build:program-rust
       - ls -lah
-      - npm run test:program-test
+      - npm run test:program-rust
       - Echo Done
