@@ -16,7 +16,7 @@ async fn test_helloworld() {
     let greeted_pubkey = Pubkey::new_unique();
 
     let mut program_test = ProgramTest::new(
-        "helloworld", // Run the BPF version with `cargo test-bpf`
+        "Istanbul HackerHouse Test", // Run the BPF version with `cargo test-bpf`
         program_id,
         processor!(process_instruction), // Run the native version with `cargo test`
     );
