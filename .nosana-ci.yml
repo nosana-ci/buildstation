@@ -2,7 +2,7 @@ nosana:
   description: Solana Build Template
 
 global:
-  image: nosana/solana:v1.0.6
+  image: nosana/solana
 
   trigger:
     branch:
@@ -11,8 +11,7 @@ global:
 jobs:
   - name: build program
     commands:
-      - ls 
-      - lah
+      - ls -lah
       - npm ci
       - npm run build:program-rust
       - ls -lah
