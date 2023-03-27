@@ -23,10 +23,8 @@ jobs:
 
   - name: write buffer
     environment:
-      SOLANA_WALLET:
-        type: nosana/secret
-        endpoint: https://secrets.k8s.dev.nos.ci/
-        value: SOLANA_WALLET
+    secrets:
+      - SOLANA_WALLET
     commands:
       - mkdir solana
       - echo $SOLANA_WALLET > solana/private-key.json
