@@ -18,8 +18,8 @@ jobs:
     commands:
       - npm run build:program-rust
     artifacts:
-      - name: programxyz
-        path: dist/program/helloworld.so
+      - name: program
+        path: dist/program/helloworld.som
 
   - name: write buffer
     environment:
